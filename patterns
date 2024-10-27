@@ -1,0 +1,8 @@
+# Exclui diretórios de cache
+- **/.cache
+- **/cache
+- **/cache2
+- **/Cache
+- **/caches
+- **/Caches
+- **/stremio-cache

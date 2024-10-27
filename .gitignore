@@ -1,0 +1,5 @@
+.vscode/data
+.vscode/extensions
+logs
+variables
+*.key
