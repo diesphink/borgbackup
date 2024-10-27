@@ -21,7 +21,7 @@ KEY_FILE=$(whoami)-$(hostname).key
 if [ "$COMMAND" = "init" ]; then
   # Initialize the repository
   echo -n "1. Inicializando repositório..."
-  borg init --encryption=repokey $BORG_REPO >> $LOG_FILE 2>&1
+  borg init --encryption=repokey $BORG_REPO 2>&1 | tee -a $LOG_FILE
   echo " done."
 
   echo -ne "2. Exportando chave..."
@@ -41,14 +41,14 @@ fi
 # If command is check
 if [ "$COMMAND" = "check" ]; then
   # Check the repository
-  borg check $BORG_REPO >> $LOG_FILE 2>&1
+  borg check $BORG_REPO 2>&1 | tee -a $LOG_FILE
   exit 0
 fi
 
 # If command is prune
 if [ "$COMMAND" = "prune" ]; then
   # Prune the repository
-  borg prune --list $BORG_PRUNE_OPTIONS $BORG_REPO >> $LOG_FILE 2>&1
+  borg prune --list $BORG_PRUNE_OPTIONS $BORG_REPO 2>&1 | tee -a $LOG_FILE
   exit 0
 fi
 
