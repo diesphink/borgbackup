@@ -3,6 +3,8 @@ Description=Automated Borg Backup (Timer)
 
 [Timer]
 OnCalendar=02:30
+Persistent=true
+Unit=borg-backup.service
 
 [Install]
 WantedBy=timers.target
