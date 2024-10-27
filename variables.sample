@@ -10,7 +10,7 @@ export BORG_PASSPHRASE='CHANGE-ME'
 # ===============================
 
 # Prune options
-export BORG_PRUNE_OPTIONS="--keep-daily=1 --keep-weekly=4 --keep-monthly=-1"
+export BORG_PRUNE_OPTIONS="--keep-daily=7 --keep-weekly=4 --keep-monthly=-1"
 
 # Raíz da cópia, a partir de onde olhar recursivamente
 export BORG_SOURCE_PATH="/home/$(whoami)"
@@ -19,13 +19,13 @@ export BORG_SOURCE_PATH="/home/$(whoami)"
 export BORG_ARCHIVE_NAME="$(hostname)-{now:%Y-%m-%d_%H:%M:%S}"
 
 # Where to mount the backup repository
-BORG_MOUNTPOINT="$(dirname "$0")/backups"
+export BORG_MOUNTPOINT="$(dirname "$0")/backups"
 
 # Log folder
-LOG_FOLDER="$(dirname "$0")/logs"
+export LOG_FOLDER="$(dirname "$0")/logs"
 
 # Log file using current date
-LOG_FILE="$LOG_FOLDER/$(basename "$0")-$(date +%Y-%m-%d_%H:%M:%S).log"
+export LOG_FILE="$LOG_FOLDER/$(basename "$0")-$(date +%Y-%m-%d_%H:%M:%S).log"
 
 # ===============================
 # VARS QUE VC NEM PODE MEXER
