@@ -2,5 +2,8 @@
 Description=Automated Borg Backup (Service)
 
 [Service]
-Type=oneshot
+# Alterar aqui!
+User=user
 ExecStart=/home/user/borgbackup/backup.sh
+
+Type=oneshot
