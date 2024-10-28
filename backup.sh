@@ -18,7 +18,7 @@ borg create \
   --stats \
   --verbose \
   --exclude-caches \
-  --patterns-from patterns \
+  --patterns-from "$BORG_PATTERN_FILE" \
   ::$BORG_ARCHIVE_NAME \
   $BORG_SOURCE_PATH 2>&1 | tee -a $LOG_FILE
 
