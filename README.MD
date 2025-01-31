@@ -10,6 +10,4 @@
 
 6. Para recuperar seus backups, execute `./mount.sh`, isso irá montar todos os backups em um diretório mount
 
-7. Ajuste o arquivo do serviço em `systemd/borg-backup.service` para corrigir o caminho até o script `backup.sh`
-
-8. Instale os serviços para realizar o backup 2h30 automaticamente com `./admin.sh install`
+7. Instale os serviços para realizar o backup 2h30 automaticamente com `./admin.sh install`

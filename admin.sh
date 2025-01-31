@@ -55,16 +55,39 @@ fi
 # If command is install
 if [ "$COMMAND" = "install" ]; then
   # Prune the repository
-  echo "1. Copiando arquivos de serviço..."
-  sudo cp -v "$(dirname "$0")/systemd/borg-backup.service" /etc/systemd/system/borg-backup.service
-  sudo cp -v "$(dirname "$0")/systemd/borg-backup.timer" /etc/systemd/system/borg-backup.timer
+  echo -n "1. Copiando arquivos de serviço..."
+  SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+  
+  cat > /etc/systemd/system/borg-backup.service <<EOF
+[Unit]
+Description=Automated Borg Backup (Service)
+
+[Service]
+User = $(stat -c '%U' ${SCRIPT_DIR})
+ExecStart = ${SCRIPT_DIR}/backup.sh
+Type=oneshot
+EOF
+  
+  cat > /etc/systemd/system/borg-backup.timer <<EOF
+[Unit]
+Description=Automated Borg Backup (Timer)
+
+[Timer]
+OnCalendar=02:30
+Persistent=true
+Unit=borg-backup.service
+
+[Install]
+WantedBy=timers.target
+EOF
+
   echo " done."
 
-  echo "2. Recarregando serviços..."
+  echo -n "2. Recarregando serviços..."
   sudo systemctl daemon-reload
   echo " done."
 
-  echo "3. Habilitando timer..."
+  echo -n "3. Habilitando timer..."
   sudo systemctl enable --now borg-backup.timer
   echo " done."
 

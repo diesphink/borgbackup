@@ -1,9 +1,0 @@
-[Unit]
-Description=Automated Borg Backup (Service)
-
-[Service]
-# Alterar aqui!
-User=user
-ExecStart=/home/user/borgbackup/backup.sh
-
-Type=oneshot
