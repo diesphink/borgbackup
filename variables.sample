@@ -12,6 +12,8 @@ export USER="sphink"
 # OUTRAS VARS AJUSTAVIES
 # ===============================
 
+HOSTNAME="$(hostname)"
+
 # Prune options
 export BORG_PRUNE_OPTIONS="--keep-daily=7 --keep-weekly=4 --keep-monthly=-1"
 
@@ -22,7 +24,7 @@ export BORG_SOURCE_PATH="/home/$USER"
 export BORG_PATTERN_FILE="$(dirname "$0")/patterns"
 
 # Archive name
-export BORG_ARCHIVE_NAME="$(hostname)-{now:%Y-%m-%d_%H:%M:%S}"
+export BORG_ARCHIVE_NAME="${HOSTNAME}-{now:%Y-%m-%d_%H:%M:%S}"
 
 # Where to mount the backup repository
 export BORG_MOUNTPOINT="$(dirname "$0")/backups"
@@ -38,7 +40,7 @@ export LOG_FILE="$LOG_FOLDER/$(basename "$0")-$(date +%Y-%m-%d_%H:%M:%S).log"
 # ===============================
 
 # Repository definition
-export BORG_REPO="ssh://$USER@192.168.15.2:22789/volume1/borg/$USER/$(hostname)"
+export BORG_REPO="ssh://$USER@192.168.15.2:22789/volume1/borg/$USER/${HOSTNAME}"
 
 # Location of borg binary on remote host
 export BORG_REMOTE_PATH=/usr/local/bin/borg
