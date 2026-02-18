@@ -9,3 +9,7 @@
 - **/stremio-cache
 - **/Trash
 - **/Downloads/Transmission
+
+# Exclui diretórios em .local/share
+# (Arquivos de dados de programas como Steam, flatpak, Trash)
+- **/.local/share
