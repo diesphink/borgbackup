@@ -64,7 +64,6 @@ function umount() {
 # In case of error, or user cancel, unmount the repository
 trap umount ERR INT
 
-echo $BORG_REPO
 echo -n "  - Montando repositório... "
 borg mount "${BORG_REPO}::${ARCHIVE}" "$BORG_MOUNTPOINT" 2> /dev/null
 sucesso
