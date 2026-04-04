@@ -47,6 +47,17 @@ function install_command() {
     fi
 }
 
+checando dependências do script - borg
+if ! command -v borg *>/dev/null
+then
+    falha borg não encontrado
+    echo -n "Instale com "
+    echo_green $(install_command borgbackup)
+    exit 1
+else
+    sucesso
+fi
+
 checando dependências do script - gum
 if ! command -v gum *>/dev/null
 then
@@ -144,6 +155,7 @@ fi
 
 function init() {
     KEY_FILE=${USER}-${HOSTNAME}.key
+    mkdir -p "$(dirname "$LOG_FILE")"
     echo "  - Inicializando repositório..."
     borg init --encryption=repokey $BORG_REPO 2>&1 | tee -a $LOG_FILE
 
@@ -163,6 +175,8 @@ $(cat $KEY_FILE)
 EOF
 
 }
+
+source variables
 
 if [[ "$INIT" == "true" ]]; then
     confirm Inicializar o repositório ${REPO} via borg init? \
